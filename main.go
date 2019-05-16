@@ -65,4 +65,17 @@ func main() {
 		fmt.Printf("%s\t%s\t%v\n", volume.Driver, volume.Name, refCount)
 	}
 	fmt.Printf("\n\n")
+
+	// Networks
+	networkHeader, _ := ascii.Render("Networks")
+	fmt.Print(networkHeader)
+
+	networks, err := cli.NetworkList(context.Background(), types.NetworkListOptions{})
+	if err != nil {
+		panic(err)
+	}
+	for _, network := range networks {
+		fmt.Printf("%s\t%s\t%s\n", network.ID, network.Name, network.Driver)
+	}
+	fmt.Printf("\n\n")
 }
